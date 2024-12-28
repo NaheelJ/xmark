@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "961645083255",
+    "project_id": "xmark-13f80",
+    "storage_bucket": "xmark-13f80.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961645083255:android:a13cf997109f2d32a8e472",
+        "android_client_info": {
+          "package_name": "com.example.xmark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCfGBjZjTjN7bQZ0fJtVjnegnBbG56O6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961645083255:android:65f83aafc8904181a8e472",
+        "android_client_info": {
+          "package_name": "com.xmark.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCfGBjZjTjN7bQZ0fJtVjnegnBbG56O6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

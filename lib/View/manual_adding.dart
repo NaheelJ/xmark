@@ -68,52 +68,37 @@ class _ManualAddingState extends State<ManualAdding> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Product Name",
-                            style: GoogleFonts.montserrat(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
+                      SizedBox(
+                        height: height * 0.05,
+                        width: width * 0.4,
+                        child: TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: productNameController,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                            letterSpacing: 1,
+                          ),
+                          keyboardType: TextInputType.name,
+                          onTapOutside: (event) {
+                            FocusScope.of(context).unfocus();
+                          },
+                          decoration: InputDecoration(
+                            labelText: "Product Name",
+                            labelStyle: GoogleFonts.montserrat(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
                               color: Colors.black,
                               letterSpacing: 1,
                             ),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            contentPadding: EdgeInsets.symmetric(horizontal: width * 0.03),
                           ),
-                          sizedBox(height * 0.01, 0.0),
-                          SizedBox(
-                            height: height * 0.05,
-                            width: width * 0.4,
-                            child: TextField(
-                              textCapitalization: TextCapitalization.sentences,
-                              controller: productNameController,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                letterSpacing: 1,
-                              ),
-                              keyboardType: TextInputType.name,
-                              onTapOutside: (event) {
-                                FocusScope.of(context).unfocus();
-                              },
-                              decoration: InputDecoration(
-                                labelText: "Name",
-                                labelStyle: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey.shade600,
-                                  letterSpacing: 1,
-                                ),
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
-                                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
-                                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
-                                floatingLabelBehavior: FloatingLabelBehavior.auto,
-                                contentPadding: EdgeInsets.symmetric(horizontal: width * 0.03),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                       const Spacer(),
                       CustomContainer(
@@ -225,17 +210,17 @@ class _ManualAddingState extends State<ManualAdding> {
                                   productNarrationPriceController = TextEditingController(text: estimationProvider.narrationPrice.toString());
                                 },
                           decoration: InputDecoration(
-                            labelText: ["Length", "Width", ""][index],
+                            labelText: ["Length", "Width", "Price"][index],
                             labelStyle: GoogleFonts.montserrat(
                               fontSize: index == 2 ? 14 : 12,
                               fontWeight: index == 2 ? FontWeight.w500 : FontWeight.w400,
-                              color: index == 2 ? Colors.black : Colors.grey.shade600,
+                              color: Colors.grey.shade600,
                               letterSpacing: 1,
                             ),
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
                             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
                             enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade500)),
-                            floatingLabelBehavior: index == 2 ? FloatingLabelBehavior.never : FloatingLabelBehavior.auto,
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
                             contentPadding: EdgeInsets.symmetric(horizontal: width * 0.03),
                           ),
                         ),
@@ -324,7 +309,7 @@ class _ManualAddingState extends State<ManualAdding> {
             CustomContainer(
               width: width,
               color: Colors.white,
-              padding: EdgeInsets.all(height * 0.03),
+              padding: EdgeInsets.symmetric(vertical: height * 0.04,horizontal: width * 0.06),
               margin: EdgeInsets.symmetric(horizontal: width * 0.04),
               borderRadius: BorderRadius.circular(10),
               boxshaw: [leftBoxShadow, rightBoxShadow],
@@ -443,7 +428,8 @@ class _ManualAddingState extends State<ManualAdding> {
                       text: 'Submit',
                       width: width,
                       onpressed: () {
-                        estimationProvider.addToSelectedProducts(
+                        if (productNameController.text.isNotEmpty && productLengthController.text.isNotEmpty && productWidthController.text.isNotEmpty) {
+                          estimationProvider.addToSelectedProducts(
                           name: productNameController.text,
                           qty: estimationProvider.qty,
                           narration: "${productWidthController.text} x ${productLengthController.text}",
@@ -453,10 +439,10 @@ class _ManualAddingState extends State<ManualAdding> {
                           totalPrice: estimationProvider.productTotalAmount,
                         );
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Home()), (route) => false);
+                        }
                       },
                     ),
                   ),
-                  sizedBox(height * 0.01, width),
                 ],
               ),
             ),

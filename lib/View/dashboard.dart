@@ -18,20 +18,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   final provider = Provider.of<Estimation>(context, listen: false);
-  //   provider.calculatingGrossAmount();
-  //   provider.calculatingGrandTotalAmount();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final provider = Provider.of<Estimation>(context, listen: false);
-    // print(provider.selectedProducts);
     return Scaffold(
       backgroundColor: scafoldBackGroundColor,
       appBar: dashBoardAppBar,
@@ -56,7 +47,7 @@ class _HomeState extends State<Home> {
                         boxshaw: [leftBoxShadow],
                         borderRadius: BorderRadius.circular(5),
                         padding: EdgeInsets.symmetric(horizontal: width * 0.025, vertical: height * 0.008),
-                        color: person.selectedProducts.isEmpty ? Colors.redAccent.shade100 : Colors.redAccent.shade200,
+                        color: person.selectedProducts.isEmpty && person.discount == 0 ? Colors.redAccent.shade100 : Colors.redAccent.shade200,
                         child: Text(
                           'Clear all',
                           style: GoogleFonts.montserrat(
@@ -367,7 +358,7 @@ Future<dynamic> showDialogueOfEditDiscountAmount({required BuildContext context}
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              CustomTextField(controller: discountOfAllProducts),
+              CustomTextField(controller: discountOfAllProducts, textInputType: TextInputType.number),
               const SizedBox(height: 5),
             ],
           ),

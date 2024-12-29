@@ -64,7 +64,6 @@ class _ProductDetailsState extends State<ProductDetails> {
     final width = MediaQuery.of(context).size.width;
     final estimationProvider = Provider.of<Estimation>(context, listen: false);
 
-    // estimationProvider.calculatingProductTotalAmount(price: widget.price);
     return Scaffold(
       backgroundColor: scafoldBackGroundColor,
       appBar: customAppBar('Product Details', true, context),
@@ -233,7 +232,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             CustomContainer(
               width: width,
               color: Colors.white,
-              padding: EdgeInsets.all(height * 0.03),
+              padding: EdgeInsets.symmetric(horizontal: width * 0.04,vertical: height * 0.04),
               margin: EdgeInsets.symmetric(horizontal: width * 0.04),
               borderRadius: BorderRadius.circular(10),
               boxshaw: [leftBoxShadow, rightBoxShadow],

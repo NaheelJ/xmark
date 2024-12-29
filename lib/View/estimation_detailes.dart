@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pdf/pdf.dart';
+// import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:xmark/Utils/styles.dart';
 import 'package:xmark/View/pdf_invoice/api_hadling.dart';
 import 'package:xmark/View/pdf_invoice/invoice_design.dart';
+// import 'package:xmark/View/pdf_invoice/web/invoice_design.dart';
+// import 'package:xmark/View/pdf_invoice/web/invoice_web.dart';
 import 'package:xmark/Viwe%20Model/estimation_provider.dart';
 import 'package:xmark/Viwe%20Model/manual_provider.dart';
 import 'package:xmark/Widgets/appBar.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:xmark/Widgets/button.dart';
 
 class EstimationDetailes extends StatelessWidget {
@@ -42,7 +43,7 @@ class EstimationDetailes extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.005),
-              CustomTextField(controller: manualProvider.partyNameController),
+              CustomTextField(controller: manualProvider.partyNameController, textInputType: TextInputType.name),
               SizedBox(height: height * 0.03),
               Align(
                 alignment: Alignment.centerLeft,
@@ -57,7 +58,7 @@ class EstimationDetailes extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.005),
-              CustomTextField(controller: manualProvider.addressController),
+              CustomTextField(controller: manualProvider.addressController, textInputType: TextInputType.name),
               SizedBox(height: height * 0.03),
               Align(
                 alignment: Alignment.centerLeft,
@@ -72,7 +73,7 @@ class EstimationDetailes extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.005),
-              CustomTextField(controller: manualProvider.mobileController),
+              CustomTextField(controller: manualProvider.mobileController, textInputType: TextInputType.number),
               SizedBox(height: height * 0.03),
               Align(
                 alignment: Alignment.centerLeft,
@@ -96,6 +97,7 @@ class EstimationDetailes extends StatelessWidget {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
                   maxLines: 10,
+                  keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(
@@ -131,15 +133,11 @@ class EstimationDetailes extends StatelessWidget {
           child: BlueElevatedButton(
             text: 'Continue',
             onpressed: () async {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const EstimationDetailes()));
-          
               final pdfFile = await PdfInvoiceApi.generate(
                 partyName: manualProvider.partyNameController.text,
                 address: manualProvider.addressController.text,
                 mobileNumber: manualProvider.mobileController.text,
                 remark: manualProvider.remarkController.text,
-                color: PdfColors.black,
-                font: pw.Font.courierBoldOblique(),
                 selectedProducts: provider.selectedProducts,
                 grossAmount: provider.grossAmount,
                 totalDiscount: provider.discount,
@@ -147,6 +145,18 @@ class EstimationDetailes extends StatelessWidget {
               );
               // opening the pdf file
               FileHandleApi.openFile(pdfFile);
+
+              // final pdfFile = await generatePdf(
+              //   partyName: manualProvider.partyNameController.text,
+              //   address: manualProvider.addressController.text,
+              //   mobileNumber: manualProvider.mobileController.text,
+              //   remark: manualProvider.remarkController.text,
+              //   selectedProducts: provider.selectedProducts,
+              //   grossAmount: provider.grossAmount,
+              //   totalDiscount: provider.discount,
+              //   grandTotalAmount: provider.grandTotalAmount,
+              // );
+              // displayPdf(pdfFile);
             },
             width: width * 0.82,
           ),
@@ -158,7 +168,8 @@ class EstimationDetailes extends StatelessWidget {
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
-  const CustomTextField({super.key, required this.controller});
+  final TextInputType textInputType;
+  const CustomTextField({super.key, required this.controller, required this.textInputType});
 
   @override
   Widget build(BuildContext context) {
@@ -168,6 +179,7 @@ class CustomTextField extends StatelessWidget {
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      keyboardType: textInputType,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.never,
         border: OutlineInputBorder(

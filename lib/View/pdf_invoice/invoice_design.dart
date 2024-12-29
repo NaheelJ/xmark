@@ -5,8 +5,6 @@ import 'package:intl/intl.dart';
 
 class PdfInvoiceApi {
   static Future<File> generate({
-    required PdfColor color,
-    required pw.Font font,
     required String partyName,
     required String address,
     required String mobileNumber,
@@ -149,7 +147,7 @@ class PdfInvoiceApi {
                   ),
 
                   // Dynamic Rows
-                  ..._buildTableRows(selectedProducts),
+                  ...buildTableRows(selectedProducts),
                 ],
               ),
 
@@ -222,7 +220,18 @@ class PdfInvoiceApi {
     return saveDocument(name: 'Sales Estimation.pdf', pdf: pdf);
   }
 
-  static List<pw.TableRow> _buildTableRows(List selectedProducts) {
+  static Future<File> saveDocument({required String name, required pw.Document pdf}) async {
+    final bytes = await pdf.save();
+
+    final dir = Directory.systemTemp;
+    final file = File('${dir.path}/$name');
+
+    await file.writeAsBytes(bytes);
+    return file;
+  }
+}
+
+ List<pw.TableRow> buildTableRows(List selectedProducts) {
     final data = List.generate(
       selectedProducts.length,
       (index) => [
@@ -247,18 +256,6 @@ class PdfInvoiceApi {
       );
     }).toList();
   }
-
-  static Future<File> saveDocument({required String name, required pw.Document pdf}) async {
-    final bytes = await pdf.save();
-
-    final dir = Directory.systemTemp;
-    final file = File('${dir.path}/$name');
-
-    await file.writeAsBytes(bytes);
-    return file;
-  }
-}
-
 
 String numberToWords(double number) {
   final units = [

@@ -43,20 +43,23 @@ class _HomeState extends State<Home> {
                       provider.discount = 0;
                     },
                     child: Consumer<Estimation>(
-                      builder: (context, person, child) => CustomContainer(
-                        boxshaw: [leftBoxShadow],
-                        borderRadius: BorderRadius.circular(5),
-                        padding: EdgeInsets.symmetric(horizontal: width * 0.025, vertical: height * 0.008),
-                        color: person.selectedProducts.isEmpty && person.discount == 0 ? Colors.redAccent.shade100 : Colors.redAccent.shade200,
-                        child: Text(
-                          'Clear all',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                      builder: (context, person, child) {
+                        person.getSelectedProducts();
+                        return CustomContainer(
+                          boxshaw: [leftBoxShadow],
+                          borderRadius: BorderRadius.circular(5),
+                          padding: EdgeInsets.symmetric(horizontal: width * 0.025, vertical: height * 0.008),
+                          color: person.selectedProducts.isEmpty && person.discount == 0 ? Colors.redAccent.shade100 : Colors.redAccent.shade200,
+                          child: Text(
+                            'Clear all',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                 ),

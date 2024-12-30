@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:xmark/View/dashboard.dart';
+import 'package:xmark/View/splash_screen.dart';
 import 'package:xmark/Viwe%20Model/estimation_provider.dart';
 import 'package:xmark/Viwe%20Model/manual_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Home(),
+        home: SplashScreen(),
       ),
     );
   }

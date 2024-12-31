@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:xmark/Utils/styles.dart';
 import 'package:xmark/View/pdf_invoice/api_hadling.dart';
 import 'package:xmark/View/pdf_invoice/invoice_design.dart';
-import 'package:xmark/View/pdf_invoice/web/invoice_design.dart';
-import 'package:xmark/View/pdf_invoice/web/invoice_web.dart';
+// import 'package:xmark/View/pdf_invoice/web/invoice_design.dart';
+// import 'package:xmark/View/pdf_invoice/web/invoice_web.dart';
 import 'package:xmark/Viwe%20Model/estimation_provider.dart';
 import 'package:xmark/Viwe%20Model/manual_provider.dart';
 import 'package:xmark/Widgets/appBar.dart';
@@ -88,7 +88,7 @@ class EstimationDetailes extends StatelessWidget {
               ),
               SizedBox(height: height * 0.005),
               SizedBox(
-                height: height * 0.15, // Increase height if needed
+                height: height * 0.15, 
                 width: width,
                 child: TextField(
                   controller: manualProvider.remarkController,
@@ -135,22 +135,7 @@ class EstimationDetailes extends StatelessWidget {
               /////////////////////////////////////////////////////////////////
               /// For Mobile Application
               /// 
-              // final pdfFileMobile = await PdfInvoiceApi.generate(
-              //   partyName: manualProvider.partyNameController.text,
-              //   address: manualProvider.addressController.text,
-              //   mobileNumber: manualProvider.mobileController.text,
-              //   remark: manualProvider.remarkController.text,
-              //   selectedProducts: provider.selectedProducts,
-              //   grossAmount: provider.grossAmount,
-              //   totalDiscount: provider.discount,
-              //   grandTotalAmount: provider.grandTotalAmount,
-              // );
-              // // opening the pdf file
-              // FileHandleApi.openFile(pdfFileMobile);
-              /////////////////////////////////////////////////////////////////
-              /// For Web Application
-              /// 
-              final pdfFileWeb = await generatePdf(
+              final pdfFileMobile = await PdfInvoiceApi.generate(
                 partyName: manualProvider.partyNameController.text,
                 address: manualProvider.addressController.text,
                 mobileNumber: manualProvider.mobileController.text,
@@ -160,7 +145,22 @@ class EstimationDetailes extends StatelessWidget {
                 totalDiscount: provider.discount,
                 grandTotalAmount: provider.grandTotalAmount,
               );
-              displayPdf(pdfFileWeb);
+              // opening the pdf file
+              FileHandleApi.openFile(pdfFileMobile);
+              /////////////////////////////////////////////////////////////////
+              /// For Web Application
+              /// 
+              // final pdfFileWeb = await generatePdf(
+              //   partyName: manualProvider.partyNameController.text,
+              //   address: manualProvider.addressController.text,
+              //   mobileNumber: manualProvider.mobileController.text,
+              //   remark: manualProvider.remarkController.text,
+              //   selectedProducts: provider.selectedProducts,
+              //   grossAmount: provider.grossAmount,
+              //   totalDiscount: provider.discount,
+              //   grandTotalAmount: provider.grandTotalAmount,
+              // );
+              // displayPdf(pdfFileWeb);
             },
             width: width * 0.82,
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xmark/Utils/styles.dart';
 import 'package:xmark/View/dashboard.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class SplashScreen extends StatelessWidget {
       },
     );
     return Scaffold(
-      backgroundColor: Colors.yellow,
+      backgroundColor: appBarColor,
       body: Container(
         height: height,
         width: width,

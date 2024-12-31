@@ -49,7 +49,7 @@ class _ManualAddingState extends State<ManualAdding> {
     final estimationProvider = Provider.of<Estimation>(context, listen: false);
     return Scaffold(
       backgroundColor: scafoldBackGroundColor,
-      appBar: customAppBar('Manual', true, context),
+      appBar: customAppBar('Manually', true, context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +69,7 @@ class _ManualAddingState extends State<ManualAdding> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SizedBox(
-                        height: height * 0.05,
+                        height: 45,
                         width: width * 0.4,
                         child: TextField(
                           textCapitalization: TextCapitalization.sentences,
@@ -102,7 +102,7 @@ class _ManualAddingState extends State<ManualAdding> {
                       ),
                       const Spacer(),
                       CustomContainer(
-                        height: height * 0.055,
+                        height: 55,
                         color: Colors.orange.shade50,
                         borderRadius: BorderRadius.circular(10),
                         child: Row(
@@ -113,8 +113,8 @@ class _ManualAddingState extends State<ManualAdding> {
                                 estimationProvider.decrementQty("product");
                               },
                               child: CustomContainer(
-                                height: height * 0.04,
-                                width: width * 0.08,
+                                height: 36,
+                                width: 38,
                                 color: const Color.fromARGB(255, 255, 95, 95),
                                 borderRadius: BorderRadius.circular(8),
                                 child: const Center(
@@ -124,7 +124,7 @@ class _ManualAddingState extends State<ManualAdding> {
                             ),
                             sizedBox(0.0, width * 0.025),
                             CustomContainer(
-                              height: height * 0.04,
+                              height: 36,
                               width: width * 0.12,
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
@@ -143,8 +143,8 @@ class _ManualAddingState extends State<ManualAdding> {
                                 estimationProvider.incrementQty("product", 10);
                               },
                               child: CustomContainer(
-                                height: height * 0.04,
-                                width: width * 0.08,
+                                height: 36,
+                                width: 38,
                                 color: Colors.lightBlueAccent.shade100,
                                 borderRadius: BorderRadius.circular(8),
                                 child: const Center(
@@ -174,7 +174,7 @@ class _ManualAddingState extends State<ManualAdding> {
                     children: List.generate(
                       3,
                       (index) => SizedBox(
-                        height: height * 0.05,
+                        height: 45,
                         width: index == 2 ? width * 0.3 : width * 0.25,
                         child: TextField(
                           controller: [productLengthController, productWidthController, productNarrationPriceController][index],
@@ -249,7 +249,7 @@ class _ManualAddingState extends State<ManualAdding> {
                           const Spacer(),
                           index == 2
                               ? SizedBox(
-                                  height: height * 0.045,
+                                  height: 40,
                                   width: width * 0.3,
                                   child: TextField(
                                     controller: productDiscountController,
@@ -359,7 +359,7 @@ class _ManualAddingState extends State<ManualAdding> {
                           ),
                           sizedBox(height * 0.005, 0.0),
                           CustomContainer(
-                            height: height * 0.066,
+                            height: 65,
                             width: width,
                             color: Colors.orange.shade50,
                             padding: EdgeInsets.symmetric(horizontal: width * 0.02),

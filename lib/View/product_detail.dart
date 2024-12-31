@@ -93,7 +93,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       const Spacer(),
                       CustomContainer(
-                        height: height * 0.055,
+                        height: 55,
                         color: Colors.orange.shade50,
                         borderRadius: BorderRadius.circular(10),
                         child: Row(
@@ -104,8 +104,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 estimationProvider.decrementQty("product");
                               },
                               child: CustomContainer(
-                                height: height * 0.04,
-                                width: width * 0.08,
+                                height: 36,
+                                width: 38,
                                 color: const Color.fromARGB(255, 255, 95, 95),
                                 borderRadius: BorderRadius.circular(8),
                                 child: const Center(
@@ -115,7 +115,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             sizedBox(0.0, width * 0.025),
                             CustomContainer(
-                              height: height * 0.04,
+                              height: 36,
                               width: width * 0.12,
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
@@ -134,8 +134,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 estimationProvider.incrementQty("product", widget.price);
                               },
                               child: CustomContainer(
-                                height: height * 0.04,
-                                width: width * 0.08,
+                                height: 36,
+                                width: 38,
                                 color: Colors.lightBlueAccent.shade100,
                                 borderRadius: BorderRadius.circular(8),
                                 child: const Center(
@@ -187,7 +187,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   },
                                 )
                               : SizedBox(
-                                  height: height * 0.045,
+                                  height: 40,
                                   width: width * 0.3,
                                   child: TextField(
                                     controller: productDiscountController,
@@ -281,7 +281,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                           sizedBox(height * 0.005, 0.0),
                           CustomContainer(
-                            height: height * 0.066,
+                            height: 60,
                             width: width,
                             color: Colors.orange.shade50,
                             padding: EdgeInsets.symmetric(horizontal: width * 0.02),
@@ -381,8 +381,8 @@ Widget decrementButton({required height, required width, required VoidCallback o
   return InkWell(
     onTap: onTap,
     child: CustomContainer(
-      height: height * 0.048,
-      width: width * 0.12,
+      height: 45,
+      width: 50,
       color: const Color.fromARGB(255, 255, 118, 118),
       borderRadius: BorderRadius.circular(8),
       child: const Center(
@@ -398,8 +398,8 @@ Widget increamentButton({required height, required width, required onTap}) {
   return InkWell(
     onTap: onTap,
     child: CustomContainer(
-      height: height * 0.048,
-      width: width * 0.12,
+      height: 45,
+      width: 50,
       color: Colors.lightBlueAccent.shade100,
       borderRadius: BorderRadius.circular(8),
       child: const Center(
@@ -413,7 +413,7 @@ Widget increamentButton({required height, required width, required onTap}) {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 Widget qtyShowBox({required height, required width, required text}) {
   return CustomContainer(
-    height: height * 0.04,
+    height: 40,
     width: width * 0.3,
     color: Colors.white,
     borderRadius: BorderRadius.circular(8),

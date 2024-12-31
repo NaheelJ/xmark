@@ -39,12 +39,13 @@ class _HomeState extends State<Home> {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () {
-                      provider.clearSelectedProductList();
+                      provider.clearAllProductsList(context);
                       provider.discount = 0;
                     },
                     child: Consumer<Estimation>(
                       builder: (context, person, child) {
                         person.getSelectedProducts();
+
                         return CustomContainer(
                           boxshaw: [leftBoxShadow],
                           borderRadius: BorderRadius.circular(5),

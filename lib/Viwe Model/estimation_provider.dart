@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:xmark/Data/products.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -190,9 +189,13 @@ class Estimation extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteProduct(index) {
+  void deleteProduct(index) async {
     if (selectedProducts.isNotEmpty) {
       selectedProducts.removeAt(index);
+      // saving removed product list with shared prefs
+      final prefs = await SharedPreferences.getInstance();
+      final String jsonString = jsonEncode(selectedProducts);
+      await prefs.setString('selected_products', jsonString);
       notifyListeners();
     } else {
       //otherwise pass a toast messege
@@ -261,6 +264,7 @@ class Estimation extends ChangeNotifier {
 ////////////////////////////////////////////////////////////////////////////////
   ///
   ///
+  ///
   Future<void> saveSelectedProducts(List<dynamic> selectedProducts) async {
     final prefs = await SharedPreferences.getInstance();
     // Convert the dynamic list to JSON
@@ -272,15 +276,18 @@ class Estimation extends ChangeNotifier {
   Future<void> getSelectedProducts() async {
     final prefs = await SharedPreferences.getInstance();
     // Get the JSON string
-    selectedProducts = prefs.getString('selected_products') as List;
-    if (selectedProducts == null) {
-      selectedProducts = [];
+    String? productsJson = prefs.getString('selected_products');
+    if (productsJson != null) {
+      // Decode the JSON string into a list
+      selectedProducts = jsonDecode(productsJson);
     }
+    // print("Selected Products: $selectedProducts");
+    notifyListeners();
   }
 
-  Future<void> removeSelectedProducts() async {
+  Future<void> clearAllProductsList(context) async {
     final prefs = await SharedPreferences.getInstance();
-    // Remove the key
-    await prefs.remove('selected_products');
+    selectedProducts.clear();
+    prefs.clear();
   }
 }

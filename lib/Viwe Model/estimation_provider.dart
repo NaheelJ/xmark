@@ -96,6 +96,15 @@ class Estimation extends ChangeNotifier {
     price = kprice + (dividerQty * kdividerPrice) + (checkQty * kcheckPrice) + (archQty * karchPrice) + (loowerQty * kloowerPrice);
   }
 
+  void setManuallyAddedPrice(value) {
+    if (value == "") {
+      price = 0;
+      return;
+    }
+    price = int.parse(value);
+    notifyListeners();
+  }
+
 // Clear all variable Quantity Values
   void assignQty({
     required int pqty,

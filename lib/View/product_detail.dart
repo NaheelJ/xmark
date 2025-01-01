@@ -93,7 +93,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       const Spacer(),
                       CustomContainer(
-                        height: 55,
+                        height: 45,
                         color: Colors.orange.shade50,
                         borderRadius: BorderRadius.circular(10),
                         child: Row(
@@ -104,8 +104,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 estimationProvider.decrementQty("product");
                               },
                               child: CustomContainer(
-                                height: 36,
-                                width: 38,
+                                height: 34,
+                                width: 36,
                                 color: const Color.fromARGB(255, 255, 95, 95),
                                 borderRadius: BorderRadius.circular(8),
                                 child: const Center(
@@ -115,7 +115,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             sizedBox(0.0, width * 0.025),
                             CustomContainer(
-                              height: 36,
+                              height: 34,
                               width: width * 0.12,
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
@@ -134,8 +134,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 estimationProvider.incrementQty("product", widget.price);
                               },
                               child: CustomContainer(
-                                height: 36,
-                                width: 38,
+                                height: 34,
+                                width: 36,
                                 color: Colors.lightBlueAccent.shade100,
                                 borderRadius: BorderRadius.circular(8),
                                 child: const Center(
@@ -281,10 +281,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                           sizedBox(height * 0.005, 0.0),
                           CustomContainer(
-                            height: 60,
+                            height: 55,
                             width: width,
                             color: Colors.orange.shade50,
-                            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             borderRadius: BorderRadius.circular(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -381,8 +381,8 @@ Widget decrementButton({required height, required width, required VoidCallback o
   return InkWell(
     onTap: onTap,
     child: CustomContainer(
-      height: 45,
-      width: 50,
+      height: 42,
+      width: 46,
       color: const Color.fromARGB(255, 255, 118, 118),
       borderRadius: BorderRadius.circular(8),
       child: const Center(
@@ -398,8 +398,8 @@ Widget increamentButton({required height, required width, required onTap}) {
   return InkWell(
     onTap: onTap,
     child: CustomContainer(
-      height: 45,
-      width: 50,
+      height: 42,
+      width: 46,
       color: Colors.lightBlueAccent.shade100,
       borderRadius: BorderRadius.circular(8),
       child: const Center(
@@ -413,7 +413,7 @@ Widget increamentButton({required height, required width, required onTap}) {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 Widget qtyShowBox({required height, required width, required text}) {
   return CustomContainer(
-    height: 40,
+    height: 38,
     width: width * 0.3,
     color: Colors.white,
     borderRadius: BorderRadius.circular(8),

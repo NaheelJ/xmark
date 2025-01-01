@@ -75,7 +75,7 @@ class _ManualAddingState extends State<ManualAdding> {
                           textCapitalization: TextCapitalization.sentences,
                           controller: productNameController,
                           style: GoogleFonts.montserrat(
-                            fontSize: 12,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                             color: Colors.black,
                             letterSpacing: 1,
@@ -102,7 +102,7 @@ class _ManualAddingState extends State<ManualAdding> {
                       ),
                       const Spacer(),
                       CustomContainer(
-                        height: 55,
+                        height: 45,
                         color: Colors.orange.shade50,
                         borderRadius: BorderRadius.circular(10),
                         child: Row(
@@ -174,7 +174,7 @@ class _ManualAddingState extends State<ManualAdding> {
                     children: List.generate(
                       3,
                       (index) => SizedBox(
-                        height: 45,
+                        height: 42,
                         width: index == 2 ? width * 0.3 : width * 0.25,
                         child: TextField(
                           controller: [productLengthController, productWidthController, productNarrationPriceController][index],
@@ -359,10 +359,10 @@ class _ManualAddingState extends State<ManualAdding> {
                           ),
                           sizedBox(height * 0.005, 0.0),
                           CustomContainer(
-                            height: 65,
+                            height: 55,
                             width: width,
                             color: Colors.orange.shade50,
-                            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             borderRadius: BorderRadius.circular(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

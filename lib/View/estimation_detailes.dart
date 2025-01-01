@@ -135,22 +135,7 @@ class EstimationDetailes extends StatelessWidget {
               /////////////////////////////////////////////////////////////////
               /// For Mobile Application
               /// 
-              final pdfFileMobile = await PdfInvoiceApi.generate(
-                partyName: manualProvider.partyNameController.text,
-                address: manualProvider.addressController.text,
-                mobileNumber: manualProvider.mobileController.text,
-                remark: manualProvider.remarkController.text,
-                selectedProducts: provider.selectedProducts,
-                grossAmount: provider.grossAmount,
-                totalDiscount: provider.discount,
-                grandTotalAmount: provider.grandTotalAmount,
-              );
-              // opening the pdf file
-              FileHandleApi.openFile(pdfFileMobile);
-              /////////////////////////////////////////////////////////////////
-              /// For Web Application
-              /// 
-              // final pdfFileWeb = await generatePdf(
+              // final pdfFileMobile = await PdfInvoiceApi.generate(
               //   partyName: manualProvider.partyNameController.text,
               //   address: manualProvider.addressController.text,
               //   mobileNumber: manualProvider.mobileController.text,
@@ -160,7 +145,22 @@ class EstimationDetailes extends StatelessWidget {
               //   totalDiscount: provider.discount,
               //   grandTotalAmount: provider.grandTotalAmount,
               // );
-              // displayPdf(pdfFileWeb);
+              // // opening the pdf file
+              // FileHandleApi.openFile(pdfFileMobile);
+              /////////////////////////////////////////////////////////////////
+              /// For Web Application
+              /// 
+              final pdfFileWeb = await generatePdf(
+                partyName: manualProvider.partyNameController.text,
+                address: manualProvider.addressController.text,
+                mobileNumber: manualProvider.mobileController.text,
+                remark: manualProvider.remarkController.text,
+                selectedProducts: provider.selectedProducts,
+                grossAmount: provider.grossAmount,
+                totalDiscount: provider.discount,
+                grandTotalAmount: provider.grandTotalAmount,
+              );
+              displayPdf(pdfFileWeb);
             },
             width: width * 0.82,
           ),

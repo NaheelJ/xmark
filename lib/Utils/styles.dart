@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 /// - AppBar Background Color
 ///
 Color scafoldBackGroundColor = Colors.grey.shade100;
-const Color appBarColor = Color.fromARGB(255, 255, 219, 90);
+const Color appBarColor = Color(0xFFFFDB5A);
 const Color primaryColor = Colors.white;
 Color additionalItemsBoxColors = Colors.orange.shade50;
 

@@ -231,69 +231,58 @@ class PdfInvoiceApi {
   }
 }
 
- List<pw.TableRow> buildTableRows(List selectedProducts) {
-    final data = List.generate(
-      selectedProducts.length,
-      (index) => [
-        '${index + 1}',
-        selectedProducts[index]['name'],
-        selectedProducts[index]['narration'],
-        '${selectedProducts[index]['quantity']}',
-        'Default',
-        '${selectedProducts[index]['price']}',
-        '${selectedProducts[index]['totalPrice']}'
-      ],
-    );
+List<pw.TableRow> buildTableRows(List selectedProducts) {
+  final data = List.generate(
+    selectedProducts.length,
+    (index) {
+      // Extract narration
+      String narration = selectedProducts[index]['narration'] ?? '';
 
-    return data.map((row) {
-      return pw.TableRow(
-        children: row.map((cell) {
-          return pw.Padding(
-            padding: const pw.EdgeInsets.all(4),
-            child: pw.Text(cell, style: const pw.TextStyle(fontSize: 9)),
-          );
-        }).toList(),
-      );
-    }).toList();
-  }
+      // Extract additional items
+      List<dynamic> additional = selectedProducts[index]['additional'] ?? [];
+
+      // Build string like: "Narration (L1x2, F1x5)"
+      String additionalText = additional.map((item) {
+        String label = item['label'] ?? '';
+        String qty = item['qty']?.toString() ?? '';
+        return "${label.isNotEmpty ? label[0] : ''} x $qty";
+      }).join(', ');
+
+      String narrationWithAddons = additionalText.isNotEmpty
+          ? "$narration  ($additionalText)"
+          : narration;
+
+      return [
+        '${index + 1}', // Serial No
+        selectedProducts[index]['name'] ?? '',
+        narrationWithAddons, // Narration + additional (label first letter + qty)
+        '${selectedProducts[index]['quantity'] ?? ''}',
+        'Default',
+        '${selectedProducts[index]['price'] ?? ''}',
+        '${selectedProducts[index]['totalPrice'] ?? ''}',
+      ];
+    },
+  );
+
+  return data.map((row) {
+    return pw.TableRow(
+      children: row.map((cell) {
+        return pw.Padding(
+          padding: const pw.EdgeInsets.all(4),
+          child: pw.Text(
+            cell,
+            style: const pw.TextStyle(fontSize: 9),
+          ),
+        );
+      }).toList(),
+    );
+  }).toList();
+}
 
 String numberToWords(double number) {
-  final units = [
-    '',
-    'One',
-    'Two',
-    'Three',
-    'Four',
-    'Five',
-    'Six',
-    'Seven',
-    'Eight',
-    'Nine'
-  ];
-  final teens = [
-    'Ten',
-    'Eleven',
-    'Twelve',
-    'Thirteen',
-    'Fourteen',
-    'Fifteen',
-    'Sixteen',
-    'Seventeen',
-    'Eighteen',
-    'Nineteen'
-  ];
-  final tens = [
-    '',
-    '',
-    'Twenty',
-    'Thirty',
-    'Forty',
-    'Fifty',
-    'Sixty',
-    'Seventy',
-    'Eighty',
-    'Ninety'
-  ];
+  final units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+  final teens = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+  final tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
   final thousands = ['', 'Thousand', 'Million', 'Billion'];
 
   if (number == 0) {
@@ -330,9 +319,7 @@ String numberToWords(double number) {
   }
 
   // Convert fractional part
-  String fractionalWords = fractionalPart > 0
-      ? 'and ${convert(fractionalPart)} Cents'
-      : '';
+  String fractionalWords = fractionalPart > 0 ? 'and ${convert(fractionalPart)} Cents' : '';
 
   return '${words.trim()} $fractionalWords'.trim();
 }

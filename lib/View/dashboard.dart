@@ -220,7 +220,7 @@ class _HomeState extends State<Home> {
                         const Spacer(),
                         InkWell(
                           onTap: () {
-                            showDialogueOfEditDiscountAmount(
+                            showBottomSheetOfEditDiscountAmount(
                               context: context,
                             );
                           },
@@ -337,63 +337,119 @@ class _HomeState extends State<Home> {
   }
 }
 
-Future<dynamic> showDialogueOfEditDiscountAmount({required BuildContext context}) {
+Future<dynamic> showBottomSheetOfEditDiscountAmount({
+  required BuildContext context,
+}) {
   final provider = Provider.of<Estimation>(context, listen: false);
   TextEditingController discountOfAllProducts = TextEditingController();
-  return showDialog(
+
+  return showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    ),
     builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: Colors.white,
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Discount',
-            style: GoogleFonts.montserrat(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-              letterSpacing: 1,
-            ),
-          ),
+      return Padding(
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 12,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
         ),
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              CustomTextField(controller: discountOfAllProducts, textInputType: TextInputType.number),
-              const SizedBox(height: 5),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              discountOfAllProducts.clear();
-            },
-            child: Text(
-              'Cancel',
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Drag handle
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[400],
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              provider.setDiscountOfListOfProducts(discountOfAllProducts.text);
-              Navigator.pop(context);
-              discountOfAllProducts.clear();
-            },
-            child: Text(
-              'Proceed',
+
+            // Title
+            Text(
+              'Discount',
               style: GoogleFonts.montserrat(
-                color: Colors.lightBlue,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.black87,
+                letterSpacing: 0.8,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 16),
+
+            // Input Field
+            CustomTextField(
+              controller: discountOfAllProducts,
+              textInputType: TextInputType.number,
+            ),
+            const SizedBox(height: 24),
+
+            // Action Buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      fixedSize: Size.fromHeight(45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      side: const BorderSide(color: Colors.grey),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      discountOfAllProducts.clear();
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: GoogleFonts.montserrat(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.lightBlue,
+                      fixedSize: Size.fromHeight(45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () {
+                      provider.setDiscountOfListOfProducts(
+                        discountOfAllProducts.text,
+                      );
+                      Navigator.of(context).pop();
+                      discountOfAllProducts.clear();
+                    },
+                    child: Text(
+                      'Proceed',
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       );
     },
   );
